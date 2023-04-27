@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit import caching
+
 import pandas as pd
 import numpy as np
 
@@ -32,10 +32,7 @@ tabs = ["Application","About"]
 page = st.sidebar.radio("Tabs",tabs)
 
 
-@st.cache(persist=False,
-          allow_output_mutation=True,
-          suppress_st_warning=True,
-          show_spinner= True)
+
 def load_csv():
     
     df_input = pd.DataFrame()  
@@ -143,10 +140,7 @@ code_options = ["Dataframe information","Model fitting","Cross validation","Hype
 
 if page == "Application":
     
-    with st.sidebar:
-        if st.button(label='Clear cache'):
-            caching.clear_cache()
-            
+    
 
         with st.beta_expander("Code snippets"):
             snippet = st.radio('Code snippets',options=code_options)    
@@ -162,7 +156,7 @@ if page == "Application":
     st.title('Forecast application 🧙🏻')
     st.write('This app enables you to generate time series forecast withouth any dependencies.')
     st.markdown("""The forecasting library used is **[Prophet](https://facebook.github.io/prophet/)**.""")
-    caching.clear_cache()
+   
     df =  pd.DataFrame()   
 
     st.subheader('1. Data loading 🏋️')
@@ -556,9 +550,7 @@ if page == "Application":
                             
                     
 
-                with col4:
-                    if st.button('Clear cache memory please'):
-                        caching.clear_cache()
+
 
             else:
                 st.write("Generate a forecast to download.")
